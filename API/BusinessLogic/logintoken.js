@@ -13,7 +13,6 @@ class logintoken
         //user name pass validation logic
         message.STATUS="UnAuthorized";
         var client=dbmgr.getDbClient();
-        
         var results=await client.Query("select * from users where userid=? and password=?",[message.USER_NAME,message.PASSWORD]);
         if(results.length>0)
         {
@@ -29,7 +28,7 @@ class logintoken
     async output(res,message)
     {
         res.responseBody.token=message.RESOURCE_TOKEN;
-        res.responseBody.status=message.STATUS;
+        res.status=message.STATUS;
         res.responseBody.errorMessage=message.ERROR_MESSAGE;
     }
     inputValidation(req)
